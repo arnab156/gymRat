@@ -1,4 +1,6 @@
 
+  $(".gymEssentials").hide();
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyBWF8f_8Z4z5IGWptXstjE2iekutxcJXTo",
@@ -23,7 +25,9 @@ function initialize() {
 
 var latitude = 0.00;
 var longitude = 0.00;
+
 function GetLocation() {
+  $(".gymEssentials").show();
   $(".gymName").empty();
   $("#foodList").empty();
   $("#weathertext").empty();
@@ -190,4 +194,18 @@ function stop() {
   $('#audio')[0].pause();
 };
 
-        
+$('.dropdown-trigger').dropdown();
+
+
+database.ref().on("child_added", function(snapshot) {
+
+  console.log(snapshot.val());
+  console.log(snapshot.key);
+
+// if email and zip code matches then:
+// or shall we use when statement
+  if ((snapshot.email == $("#member_email").val()) && snapshot.email ==$("#member_zip").val() )  {
+    //populate everyone's name and details  with same zip code
+  }
+  
+});
