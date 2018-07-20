@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>GYM RAT</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <!-- for MAP STYLE - - remove if moving the map to new page -->
+  <style>
+    #map {
+      width: 100%;
+      height: 400px;
+      background-color: grey;
+    }
+    #zipcode-button {
+      background-color : lime;
+    }
+    #weathertext {
+      font-size: 18px;
+      color: lime;
+      font-style: bold;
+    }
+    #GymRatForm {
+      color: aliceblue;
+    }
+  </style>
+
+</head>
+<body>
+  <nav class="white" role="navigation">
+  
+    <div class="nav-wrapper container">
+      <a  id="logo-container" href="#" class="brand-logo" style= "left: 10%"><img src="gymrat.png" style="height:40px; width:40px;"></a>
+      <a class="btn-floating btn-large cyan pulse right modal-trigger" href="#modal1" style= "right: 10%;">Login</a>
+      
+<!-- 
+      <a class="waves-effect waves-light btn-small cyan right modal-trigger" href="#modal1"><i class="material-icons left">done</i>Already registered?</a>
+              <br> -->
+
+
+    </div>
+     
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center white-text text-lighten-2" id="logo-container-text">The Gym Rat</h1>
+        <div class="row center">
+          <!-- <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5> -->
+          <!-- <input type="text" id="txtAddress" value="Enter your Zipcode" class = "white-text text-lighten-2 center" > -->
+        
+          <input id="txtAddress" type="text" class="validate cyan-text center" placeholder="60602">
+          <label for="txtAddress">Zip Code</label>
+
+        </div>
+        <div class="row center">
+          <a class="btn-floating pulse lime-text" id="zipcode-button" type="button" onclick="GetLocation()"><i class="material-icons">menu</i></a>
+          <!-- <a href="#" id="zipcode-button" class="btn-large waves-effect waves-light lime-text" type="button" onclick="GetLocation()">Enter Zipcode</a> -->
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center lime-text"><i class="material-icons">video_library</i></h2>
+            <h5 class="center orange-text">Workout Videos</h5>
+            <div id="video" class = "light">  </div>
+            <br>
+            <a class="waves-effect waves-light btn center" href="youtube.html">Get Started</a>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center lime-text"><i class="material-icons">directions_run</i></h2>
+            <h5 class="center orange-text"> Gym Locations</h5>
+            <p class ="gymName center"></p>
+            <div id="map" class = "light">  </div>
+
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center lime-text">
+              <i class="material-icons">music_note</i>
+            </h2>
+            <h5 class="center orange-text">Workout Music</h5>
+            <div id="meals" class="light"> </div>
+            <div class="row center">
+              <input type="text" style="text-align: center" value=""  id="keyword">
+              <input type="button" class="waves-effect waves-light btn" value="LOAD" onclick="load()">
+              <input type="button" class="waves-effect waves-light btn" value="PLAY" onclick="play()">
+              <input type="button" class="waves-effect waves-light btn" value="STOP" onclick="stop()">              
+              <br>
+              <audio id="audio"></audio>
+              <br>
+              <img id="artwork" width="100" height="100">
+            </div>
+            <!-- <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h1 class="header col s12 light ">Eat Healthy, Live Healthy!</h1>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2"></div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4 id = "foodTitle" class="lime-text"></h4>
+          <p id = "foodList" class="center orange-text light"> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="center lime-text"><i class="material-icons">fitness_center</i></h5>
+          <p class="lime-text">Join the Gym Buddy Program</p>
+          
+             <div id = "input">
+                          
+              <form id = "GymRatForm" class="col l12 s6" style = "padding-left:25%; padding-right:25%">
+                <label for = "ratName" class = "center white-text"> Preferred Name</label>
+                <input type = "text" id="ratName" class = "center white-text">
+                
+                <label for = "ratEmail" class = " center white-text"> Email Address</label>
+                <input type = "text" id="ratEmail" class = "center white-text">
+                <br>
+                <label for = "ratPref" class = " center white-text"> Preferred Gym</label>
+                <input type = "text" id="ratPref" class = "center white-text">
+                
+                <label for = "ratZip" class = " center white-text"> Zipcode</label>
+                <input type = "text" id="ratZip" class = "center white-text">
+                <br>
+                
+                <!-- <input id = "addRat" type="submit" value = "Join Today!" class="btn-large waves-effect waves-light lime"> -->
+                <a  id = "addRat" class="btn-floating btn-large pulse lime"><i class="material-icons">add</i></a>
+                <!-- <input id = "member" class = "right" type="submit" value = "Already a member?" class="btn-floating btn-large waves-effect waves-light red"> -->
+              </form>
+              <br> <br>
+              <a class="waves-effect waves-light btn-small cyan right modal-trigger" href="#modal1"><i class="material-icons left">done</i>Already registered?</a>
+              <br>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
+  </div>
+
+    <!-- Modal Structure MODAL MODAL MODAL MODAL MODAL-->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Find my Gym Buddy</h4>
+            <p>Enter Registered email address and zipcode</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+
+  <footer class="page-footer lime">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">RAR Enterprise stands for Rion Arnab Rigo Enterprise. We are in the business of making the Millennials healthy! Our website is a resource book for Millennials to find healthy restaurants, workout buddies, trainers, and healthy meal at home by zip codes. Please contact us if you have any questions, concerns, or feedback.</p>
+        </div>
+        <div class="col l2 s12">
+          <h5 class="orange-text center">Rion</h5>
+          <img src="Rion.jpg" alt="Arnab" class="circle responsive-img">
+          
+        </div>
+        <div class="col l2 s12">
+          <h5 class="orange-text center">Arnab</h5>
+          <img src="arnab.jpg" alt="Arnab" class="circle responsive-img">
+         
+        </div>
+        <div class="col l2 s12">
+          <h5 class="orange-text center">Rigo</h5>
+          <img src="rigo.jpg" alt="Rigo" class="circle responsive-img">
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Copyright <a class="brown-text text-lighten-3" href="http://materializecss.com"> RAR Enterprise</a>
+      </div>
+    </div>
+  </footer>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+ 
+<!-- API key Google AIzaSyBFYURsPVRuZ1KsfdbtECIAnmyp_ZnmwX4 -->
+<!-- google places API AIzaSyAMTLZvZIATd80L9RQK00z7xcjf9dY_Reg -->
+
+  <script src="js/health.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFYURsPVRuZ1KsfdbtECIAnmyp_ZnmwX4&callback=initialize"
+  type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script>
+    $( document ).ready(function() {
+  $('#modal1').modal().modal('open');
+});
+     </script>
+  </body>
+</html>
