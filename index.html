@@ -18,16 +18,18 @@
       background-color: grey;
     }
     #zipcode-button {
-      background-color : lime;
+      background-color : #cddc;
     }
     #weathertext {
       font-size: 18px;
-      color: lime;
+      color: #cddc39;
       font-style: bold;
+      background-color: black;
     }
     #GymRatForm {
       color: aliceblue;
     }
+
   </style>
 
 </head>
@@ -37,12 +39,6 @@
     <div class="nav-wrapper container">
       <a  id="logo-container" href="#" class="brand-logo" style= "left: 10%"><img src="gymrat.png" style="height:40px; width:40px;"></a>
       <a class="btn-floating btn-large cyan pulse right modal-trigger" href="#modal1" style= "right: 10%;">Login</a>
-      
-<!-- 
-      <a class="waves-effect waves-light btn-small cyan right modal-trigger" href="#modal1"><i class="material-icons left">done</i>Already registered?</a>
-              <br> -->
-
-
     </div>
      
   </nav>
@@ -53,9 +49,7 @@
         <br><br>
         <h1 class="header center white-text text-lighten-2" id="logo-container-text">The Gym Rat</h1>
         <div class="row center">
-          <!-- <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5> -->
-          <!-- <input type="text" id="txtAddress" value="Enter your Zipcode" class = "white-text text-lighten-2 center" > -->
-        
+          
           <input id="txtAddress" type="text" class="validate cyan-text center" placeholder="60602">
           <label for="txtAddress">Zip Code</label>
 
@@ -83,8 +77,31 @@
             <h5 class="center orange-text">Workout Videos</h5>
             <div id="video" class = "light">  </div>
             <br>
-            <a class="waves-effect waves-light btn center" href="youtube.html">Get Started</a>
+            <a class="btn-floating pulse lime" type="button" href="youtube.html" style="left:40%"><i class="material-icons">ondemand_video</i>Start</a>
           </div>
+          <br> <br> <br>
+          <!-- GYM ESSENTIALS will populate only when searching gyms close by -->
+          <div class ="gymEssentials center"> 
+            <h5 class="center orange-text"> Workout Essentials</h5>
+           
+          <!-- Dropdown Trigger -->
+            <a class='dropdown-trigger btn lime white-text' href='#' data-target='dropdown1'>Choose Activity!</a>
+
+         <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+              <li><a href="https://www.runnersworld.com/running-gear/" target="_blank">Running</a></li>
+              <li><a href="https://www.bodybuilding.com/fun/gym-essentials-7-items-you-need-in-your-gym-bag.html" target="_blank">Training at Gym</a></li>
+          <!-- <li class="divider" tabindex="-1"></li> -->
+              <li><a href="https://www.tennis-warehouse.com/" target="_blank">Tennis</a></li>
+              <li><a href="http://www.paddlepalace.com/" target="_blank">Table Tennis</a></li>
+              <li><a href="https://www.mlbshop.com/" target="_blank">Baseball</a></li>
+              <li><a href="http://www.getofficial.com/categories/Football/" target="_blank">Football</a></li>
+              <li><a href="https://www.adidas.com/us/soccer-apparel?cm_mmc=AdieSEM_Google-_-DSA-General-_-DSA-Soccer-X-General-_-ds_kid_39700030337390494&cm_mmca1=US&cm_mmca2=b&ds_agid=58700003799987176&gclid=CjwKCAjwkMbaBRBAEiwAlH5v_vqomIZj3neT2uNE0OivH4jtpGh3Ud0D4vDXBsdIXZmfl4H_kl13GhoCdO8QAvD_BwE&gclsrc=aw.ds&dclid=CJDzhu2IrtwCFVEKNwodwJYB0g" target="_blank">Soccer</a></li>
+              <li><a href="https://www.performancebike.com/shop/cycling-clothing" target="_blank">Biking</a></li>
+              <li><a href="https://thelifeguardstore.com/swim-shop.html" target="_blank">Swimming</a></li>
+            </ul>
+          </div>
+      
         </div>
 
         <div class="col s12 m4">
@@ -105,10 +122,10 @@
             <h5 class="center orange-text">Workout Music</h5>
             <div id="meals" class="light"> </div>
             <div class="row center">
-              <input type="text" style="text-align: center" value=""  id="keyword">
-              <input type="button" class="waves-effect waves-light btn" value="LOAD" onclick="load()">
-              <input type="button" class="waves-effect waves-light btn" value="PLAY" onclick="play()">
-              <input type="button" class="waves-effect waves-light btn" value="STOP" onclick="stop()">              
+              <input type="text" style="text-align: center;" placeholder="Artist or Genre "  id="keyword">
+              <input type="button" class="waves-effect waves-light btn lime" value="LOAD" onclick="load()">
+              <input type="button" class="waves-effect waves-light btn lime" value="PLAY" onclick="play()">
+              <input type="button" class="waves-effect waves-light btn lime" value="STOP" onclick="stop()">              
               <br>
               <audio id="audio"></audio>
               <br>
@@ -188,20 +205,40 @@
     <!-- Modal Structure MODAL MODAL MODAL MODAL MODAL-->
     <div id="modal1" class="modal">
         <div class="modal-content">
-            <h4>Find my Gym Buddy</h4>
-            <p>Enter Registered email address and zipcode</p>
+            <h4 class="center cyan-text">Find my Gym Buddy</h4>
+            <form class="col s12">
+              <div class="row"> 
+                <div class="input-field col s6">
+                  <input id="member_email" type="email" class="validate">
+                  <label for="member_email">Enter your registered email</label>
+                </div>
+
+                <div class="input-field col s6">
+                  <input id="member_zip" type="text" class="validate">
+                  <label for="member_zip">Enter Zip</label>
+                </div> 
+                <div class="input-field col s7 right">  <a  id = "findMember"   onclick="fun();" class="btn-floating btn-large pulse cyan"><i class="material-icons large">people</i></a> 
+                </div>
+                
+                <div class="col s12 orange-text center" id="populateBuddies">
+
+                  <!-- this is where people in the same zip code will show up. -->
+                </div>
+              </div>
+            </form>  
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
         </div>
     </div>
+    <!-- end of modal -->
 
   <footer class="page-footer lime">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Company Bio</h5>
-          <p class="grey-text text-lighten-4">RAR Enterprise stands for Rion Arnab Rigo Enterprise. We are in the business of making the Millennials healthy! Our website is a resource book for Millennials to find healthy restaurants, workout buddies, trainers, and healthy meal at home by zip codes. Please contact us if you have any questions, concerns, or feedback.</p>
+          <p class="grey-text text-lighten-4">RAR Enterprise stands for Rion Arnab Rigo Enterprise. We are in the business of making the Millennials healthy! Our website is a resource book for Millennials to find healthy recipes, workout buddies, workout videos, zip code specific weather and latest music. Please contact us if you have any questions, concerns, or feedback.</p>
         </div>
         <div class="col l2 s12">
           <h5 class="orange-text center">Rion</h5>
@@ -245,6 +282,12 @@
     $( document ).ready(function() {
   $('#modal1').modal().modal('open');
 });
+
+function fun(){
+  $("#populateBuddies").text("COMING SOON!! THANK YOU FOR YOUR PATIENCE.");
+}
+
+
      </script>
   </body>
 </html>

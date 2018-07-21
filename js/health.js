@@ -1,4 +1,6 @@
 
+  $(".gymEssentials").hide();
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyBWF8f_8Z4z5IGWptXstjE2iekutxcJXTo",
@@ -23,7 +25,9 @@ function initialize() {
 
 var latitude = 0.00;
 var longitude = 0.00;
+
 function GetLocation() {
+  $(".gymEssentials").show();
   $(".gymName").empty();
   $("#foodList").empty();
   $("#weathertext").empty();
@@ -190,4 +194,70 @@ function stop() {
   $('#audio')[0].pause();
 };
 
-        
+$('.dropdown-trigger').dropdown();
+
+// var gymBuddies =[];
+database.ref().on("value", function(snapshot) {
+
+// console.log(snapshot.val());
+// console.log(snapshot.key);
+
+findBuddies(snapshot.val());
+
+
+// var gymObject = {
+//   name : snapshot.val().Name,
+//   email : snapshot.val().Email,
+//   gym: snapshot.val().PreferredGym,
+//   zip: snapshot.val().Zipcode
+// };
+// console.log(gymObject);
+
+// gymBuddies.push(gymObject);
+
+// if email and zip code matches then:
+// or shall we use when statement
+  // if ((snapshot.email == $("#member_email").val()) && snapshot.email ==$("#member_zip").val() )  {
+  //   //populate everyone's name and details  with same zip code
+  // }
+  
+});
+
+function findBuddies (obj) {
+  var matchBuddies = [];
+  var zipCodes = [];
+  // for (var i=0; i<obj.length; i++){
+  //   if (!zipCodes.includes(obj[i].zip)){
+  //     zipCodes.push(obj[i].zip)
+  //   }
+
+  // }
+  console.log(obj);
+  
+
+  for (var prop1 in obj ){
+    if (!zipCodes.includes(obj[prop1].Zipcode)) {
+      var zipObj = {
+        zip : obj[prop1].Zipcode,
+        buddies : [],
+
+      };
+      zipCodes.push(obj[prop1].Zipcode);
+      matchBuddies.push(zipObj);
+    }
+
+
+  }
+  console.log(zipCodes);
+  // console.log(matchBuddies);
+
+  for (var prop1 in obj){
+
+    if (matchBuddies.includes(obj[prop1].Zipcode)){
+      matchBuddies.buddies.push(obj[prop1].Name);
+    }
+  }
+console.log(matchBuddies);
+}
+
+// findBuddies(gymBuddies);
