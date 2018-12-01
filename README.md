@@ -2,6 +2,10 @@
 
 Gym Rat
 
+FOR PROPER FUNCTIONING OF THIS BETA APP PLEASSE USE GOOGLE CHROME THEN DOWNLOAD AND RUN CORS EXTENSION. PLEASE CLICK AND DEACTIVATE CORS ONCE DONE USING THIS APP.
+
+------------------------------------------------------------------------------------------------------------------
+
 Description: The Gym Rat App is a one stop shop for all of your gym needs and motivates the users to live a healthy lifestyle. Navigating through the app a user will be able to find their nearest gym locations, search and find new music to work out to, the weather in their current location; in case they want to go for a run. Workout videos for at home or in the gym; to exclude the need for a personal trainer, and healthy recipes to cook at home. We also added a feature to find workout buddies near each other, so you can meet new people and reach your fitness goals together.
 
 Motivation: There are hundreds of apps in the market that only deliver one or two things to the customer. We have our phones filled with many fitness, meals and music apps… So we thought why not combine all into one solid application that can do ALL of those things at the palm of your hand.
